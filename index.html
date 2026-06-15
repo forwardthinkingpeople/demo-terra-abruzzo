@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra d'Abruzzo Ceramiche — Castelli, Teramo</title>
+<meta name="description" content="Ceramiche artigianali di Castelli, Teramo. Maioliche dipinte a mano dal 1962. Spedizione in tutta Italia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --calce: #FAFAF7;
+    --cobalto: #1B3A6B;
+    --cobalto-light: #2D5BA3;
+    --terracotta: #C4622D;
+    --terracotta-light: #E8845A;
+    --sabbia: #E8E4D9;
+    --testo: #1A1A18;
+    --testo-muted: #5A5A52;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--calce);
+    color: var(--testo);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(27,58,107,0.1);
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--cobalto);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-brand span { color: var(--terracotta); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--testo-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cobalto); }
+  .nav-cta {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em;
+    background: var(--cobalto); color: white;
+    padding: 0.6rem 1.4rem; border-radius: 2px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--cobalto-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
+    background: var(--calce);
+  }
+
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.055;
+    background-image:
+      repeating-linear-gradient(0deg, var(--cobalto) 0, var(--cobalto) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, var(--cobalto) 0, var(--cobalto) 1px, transparent 1px, transparent 40px);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    font-weight: 700; line-height: 1.0;
+    color: var(--cobalto);
+    text-align: center;
+    max-width: 900px;
+    position: relative;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    margin-top: 1.75rem;
+    font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+    color: var(--testo-muted); text-align: center;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--cobalto); color: white;
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--cobalto-light); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent; color: var(--cobalto);
+    padding: 0.9rem 2.2rem; border-radius: 2px;
+    border: 1.5px solid var(--cobalto);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--cobalto); color: white; }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--testo-muted); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; animation: bounce 2.5s ease-in-out infinite;
+  }
+  .hero-scroll::after {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--testo-muted), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── STRIP ── */
+  .strip {
+    background: var(--cobalto); color: white;
+    padding: 1rem 3rem;
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .strip-item { display: flex; align-items: center; gap: 0.5rem; opacity: 0.9; }
+
+  /* ── SEZIONI ── */
+  section { padding: 6rem 3rem; }
+
+  .section-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--cobalto);
+    margin-bottom: 1.25rem;
+  }
+  .section-body {
+    font-size: 1rem; font-weight: 300; line-height: 1.85;
+    color: var(--testo-muted); max-width: 560px;
+  }
+
+  /* ── CHI SIAMO ── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .about-visual {
+    position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 1px;
+  }
+  .about-tile-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    height: 100%;
+  }
+  .tile {
+    border-radius: 1px; transition: opacity 0.3s;
+  }
+  .tile:hover { opacity: 0.8; }
+  .about-badge {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: var(--terracotta); color: white;
+    padding: 1.5rem; text-align: center;
+    font-family: var(--serif);
+  }
+  .about-badge .num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
+  .about-badge .label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .about-stat-row {
+    display: flex; gap: 2rem; margin-top: 2rem;
+    padding-top: 2rem; border-top: 1px solid var(--sabbia);
+  }
+  .about-stat .value {
+    font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--cobalto);
+  }
+  .about-stat .label { font-size: 0.78rem; color: var(--testo-muted); margin-top: 2px; }
+
+  /* ── CATALOGO ── */
+  .catalogo { background: white; }
+  .catalogo-inner { max-width: 1200px; margin: 0 auto; }
+  .catalogo-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .product-card {
+    cursor: pointer;
+    transition: transform 0.25s;
+  }
+  .product-card:hover { transform: translateY(-4px); }
+  .product-card:hover .product-img-wrap::after { opacity: 1; }
+  .product-img-wrap {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--sabbia);
+    position: relative;
+    border-radius: 1px;
+  }
+  .product-img-wrap::after {
+    content: 'Scopri →';
+    position: absolute; inset: 0;
+    background: rgba(27,58,107,0.82);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.9rem; letter-spacing: 0.08em;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .product-svg {
+    width: 100%; height: 100%; padding: 1.5rem;
+  }
+  .product-info { padding: 1rem 0.25rem; }
+  .product-name { font-family: var(--serif); font-size: 1.1rem; color: var(--cobalto); }
+  .product-detail { font-size: 0.8rem; color: var(--testo-muted); margin-top: 3px; }
+  .product-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 0.75rem;
+  }
+  .product-price { font-size: 1.15rem; font-weight: 500; color: var(--cobalto); }
+  .product-price .orig {
+    font-size: 0.8rem; color: var(--testo-muted);
+    text-decoration: line-through; margin-left: 6px; font-weight: 400;
+  }
+  .btn-acquista {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--terracotta);
+    background: none; border: 1.5px solid var(--terracotta);
+    padding: 0.45rem 1rem; border-radius: 2px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-acquista:hover { background: var(--terracotta); color: white; }
+
+  /* ── PROCESSO ── */
+  .processo-inner { max-width: 1000px; margin: 0 auto; }
+  .steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; background: var(--sabbia); margin-top: 3rem;
+  }
+  .step {
+    background: var(--calce); padding: 2.5rem 2rem;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--serif); font-size: 3.5rem; font-weight: 700;
+    color: var(--sabbia); line-height: 1; margin-bottom: 1rem;
+  }
+  .step-title { font-weight: 500; font-size: 1rem; color: var(--cobalto); margin-bottom: 0.5rem; }
+  .step-body { font-size: 0.85rem; color: var(--testo-muted); line-height: 1.7; }
+
+  /* ── TESTIMONIANZE ── */
+  .testimonial-section { background: var(--cobalto); }
+  .testimonial-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; max-width: 1000px; margin: 3rem auto 0;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 2rem; border-radius: 1px;
+  }
+  .testimonial-text {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+  }
+  .testimonial-author { font-size: 0.8rem; color: rgba(255,255,255,0.55); letter-spacing: 0.06em; }
+  .testimonial-author strong { color: rgba(255,255,255,0.85); display: block; margin-bottom: 2px; font-style: normal; font-family: var(--sans); }
+
+  /* ── CONTATTI ── */
+  .contatti-inner {
+    max-width: 800px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  input, textarea, select {
+    font-family: var(--sans); font-size: 0.9rem;
+    background: white; border: 1px solid var(--sabbia);
+    padding: 0.8rem 1rem; border-radius: 2px; width: 100%;
+    color: var(--testo); transition: border-color 0.2s;
+    outline: none;
+  }
+  input:focus, textarea:focus { border-color: var(--cobalto); }
+  textarea { min-height: 120px; resize: vertical; }
+  .btn-submit {
+    background: var(--terracotta); color: white;
+    padding: 0.9rem 2rem; border: none; border-radius: 2px;
+    font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.04em; cursor: pointer; align-self: flex-start;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: #A8521F; transform: translateY(-1px); }
+  .contact-info { padding-top: 0.5rem; }
+  .contact-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.75rem;
+  }
+  .contact-icon {
+    width: 36px; height: 36px; background: var(--sabbia);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--testo-muted); margin-bottom: 3px; }
+  .contact-value { font-size: 0.95rem; color: var(--cobalto); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111110; color: rgba(255,255,255,0.45);
+    padding: 2.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; font-size: 0.78rem;
+  }
+  .footer-brand { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.7); }
+  .footer-brand span { color: var(--terracotta-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contatti-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .strip { gap: 1.5rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* ── FADE IN ── */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Terra<span>d'Abruzzo</span></a>
+  <ul class="nav-links">
+    <li><a href="#chi-siamo">Il laboratorio</a></li>
+    <li><a href="#catalogo">Catalogo</a></li>
+    <li><a href="#processo">Come funziona</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+  <a href="#contatti" class="nav-cta">Richiedi preventivo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <p class="hero-eyebrow">Castelli, Teramo — dal 1962</p>
+  <h1 class="hero-title">
+    Ceramica <em>viva</em>,<br>dipinta a mano
+  </h1>
+  <p class="hero-sub">
+    Ogni pezzo nasce in laboratorio, impastato con l'argilla del Gran Sasso e dipinto seguendo i disegni originali della scuola di Castelli.
+  </p>
+  <div class="hero-actions">
+    <a href="#catalogo" class="btn-primary">Esplora il catalogo</a>
+    <a href="#chi-siamo" class="btn-secondary">La nostra storia</a>
+  </div>
+  <div class="hero-scroll">Scorri</div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <span class="strip-item">✦ Spedizione in tutta Italia</span>
+  <span class="strip-item">✦ Dipinto a mano, pezzo unico</span>
+  <span class="strip-item">✦ Certificato di autenticità</span>
+  <span class="strip-item">✦ Resi entro 30 giorni</span>
+</div>
+
+<!-- CHI SIAMO -->
+<section id="chi-siamo">
+  <div class="about">
+    <div class="about-visual fade-in">
+      <div class="about-tile-grid">
+        <!-- Colori della ceramica di Castelli in SVG tile -->
+        <svg viewBox="0 0 60 60" class="tile" style="grid-column:span 2; grid-row:span 2; background:#E8E4D9">
+          <circle cx="30" cy="30" r="22" fill="none" stroke="#1B3A6B" stroke-width="2"/>
+          <path d="M30 8 Q45 20 45 30 Q45 45 30 52 Q15 45 15 30 Q15 20 30 8Z" fill="none" stroke="#C4622D" stroke-width="1.5"/>
+          <circle cx="30" cy="30" r="8" fill="#1B3A6B" opacity="0.15"/>
+          <path d="M20 30 Q30 18 40 30 Q30 42 20 30Z" fill="#1B3A6B" opacity="0.2"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#1B3A6B">
+          <path d="M10 50 Q30 10 50 50Z" fill="white" opacity="0.15"/>
+          <circle cx="30" cy="25" r="10" fill="white" opacity="0.1"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#C4622D">
+          <rect x="15" y="15" width="30" height="30" rx="15" fill="white" opacity="0.15"/>
+          <line x1="30" y1="10" x2="30" y2="50" stroke="white" stroke-width="1" opacity="0.3"/>
+          <line x1="10" y1="30" x2="50" y2="30" stroke="white" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#E8E4D9">
+          <path d="M10 10 L50 10 L50 50 L10 50Z" fill="none" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M20 20 Q30 15 40 20 Q45 30 40 40 Q30 45 20 40 Q15 30 20 20Z" fill="#1B3A6B" opacity="0.12"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#2D5BA3">
+          <circle cx="30" cy="30" r="18" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="30" cy="30" r="8" fill="white" opacity="0.2"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#FAFAF7">
+          <path d="M30 5 L35 20 L50 20 L38 30 L43 45 L30 35 L17 45 L22 30 L10 20 L25 20Z" fill="#C4622D" opacity="0.3"/>
+        </svg>
+        <svg viewBox="0 0 60 60" class="tile" style="background:#1B3A6B; grid-column:span 2">
+          <path d="M5 30 Q20 10 35 30 Q50 50 55 30" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+          <path d="M5 40 Q20 20 35 40 Q50 60 55 40" fill="none" stroke="#C4622D" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="about-badge">
+        <div class="num">62</div>
+        <div class="label">anni di storia</div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <p class="section-eyebrow">Chi siamo</p>
+      <h2 class="section-title">Tre generazioni, un solo forno</h2>
+      <p class="section-body">
+        Il laboratorio Rossi nasce nel 1962 con il nonno Emilio, apprendista nella bottega del maestro Ferruccio Colizzi. Oggi è Giulia, sua nipote, a tenere i pennelli — conservando la stessa ricetta d'impasto e gli stessi pigmenti a base di ossidi minerali che non sbiadiscono.
+      </p>
+      <p class="section-body" style="margin-top:1rem">
+        Castelli è un paese di 800 anime e mille forni. Le sue maioliche sono nei musei di Londra, Berlino, New York. Le nostre vivono nelle case di chi vuole portare quel mondo in tavola.
+      </p>
+      <div class="about-stat-row">
+        <div class="about-stat">
+          <div class="value">2.400+</div>
+          <div class="label">Pezzi prodotti ogni anno</div>
+        </div>
+        <div class="about-stat">
+          <div class="value">38</div>
+          <div class="label">Regioni raggiunte</div>
+        </div>
+        <div class="about-stat">
+          <div class="value">100%</div>
+          <div class="label">Lavorazione manuale</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOGO -->
+<section id="catalogo" class="catalogo">
+  <div class="catalogo-inner">
+    <div class="catalogo-header fade-in">
+      <div>
+        <p class="section-eyebrow">Il catalogo</p>
+        <h2 class="section-title" style="margin-bottom:0">Pezzi selezionati</h2>
+      </div>
+      <a href="#contatti" class="btn-secondary">Catalogo completo →</a>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="200" rx="90" ry="18" fill="#C4622D" opacity="0.15"/>
+            <path d="M80 180 Q75 100 150 80 Q225 100 220 180 Q210 220 150 225 Q90 220 80 180Z" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <path d="M90 170 Q87 105 150 88 Q213 105 210 170" fill="none" stroke="#E8E4D9" stroke-width="8"/>
+            <circle cx="150" cy="145" r="35" fill="none" stroke="#1B3A6B" stroke-width="1.5"/>
+            <path d="M125 130 Q150 110 175 130 Q185 145 175 160 Q150 170 125 160 Q115 145 125 130Z" fill="#1B3A6B" opacity="0.12"/>
+            <path d="M135 145 Q150 135 165 145 Q165 158 150 162 Q135 158 135 145Z" fill="#C4622D" opacity="0.4"/>
+            <path d="M80 145 Q70 145 68 155 Q67 165 80 165" fill="none" stroke="#1B3A6B" stroke-width="2"/>
+            <path d="M220 145 Q230 145 232 155 Q233 165 220 165" fill="none" stroke="#1B3A6B" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Tazza da colazione</div>
+          <div class="product-detail">Maiolica · Motivo tradizionale Castelli · 350ml</div>
+          <div class="product-footer">
+            <div class="product-price">€38 <span class="orig">€45</span></div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="210" rx="80" ry="12" fill="#1B3A6B" opacity="0.08"/>
+            <path d="M90 100 L85 210 Q85 225 150 228 Q215 225 215 210 L210 100 Z" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <path d="M90 100 Q90 88 150 85 Q210 88 210 100" fill="#E8E4D9" stroke="#1B3A6B" stroke-width="1.5"/>
+            <rect x="100" y="115" width="100" height="70" rx="2" fill="none" stroke="#1B3A6B" stroke-width="1"/>
+            <path d="M110 140 Q150 120 190 140" fill="none" stroke="#C4622D" stroke-width="1.5"/>
+            <path d="M110 155 Q150 135 190 155" fill="none" stroke="#C4622D" stroke-width="1.5"/>
+            <circle cx="150" cy="175" r="8" fill="#1B3A6B" opacity="0.2"/>
+            <path d="M105 195 Q150 210 195 195" fill="none" stroke="#1B3A6B" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Vaso da tavolo</div>
+          <div class="product-detail">Maiolica · H 22cm · Decorazione floreale</div>
+          <div class="product-footer">
+            <div class="product-price">€72</div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="215" rx="95" ry="14" fill="#C4622D" opacity="0.1"/>
+            <ellipse cx="150" cy="200" rx="90" ry="25" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <ellipse cx="150" cy="200" rx="65" ry="18" fill="none" stroke="#1B3A6B" stroke-width="1"/>
+            <path d="M85 200 L90 135 Q90 100 150 95 Q210 100 210 135 L215 200" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <path d="M100 160 Q150 140 200 160" fill="none" stroke="#C4622D" stroke-width="2"/>
+            <ellipse cx="150" cy="115" rx="30" ry="8" fill="#E8E4D9" stroke="#1B3A6B" stroke-width="1.5"/>
+            <path d="M120 115 L115 90 Q115 82 150 80 Q185 82 185 90 L180 115" fill="#E8E4D9" stroke="#1B3A6B" stroke-width="1.5"/>
+            <path d="M125 105 Q150 100 175 105" fill="none" stroke="#1B3A6B" stroke-width="1" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Zuppiera con coperchio</div>
+          <div class="product-detail">Maiolica · Ø 26cm · Uso tavola</div>
+          <div class="product-footer">
+            <div class="product-price">€145</div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="218" rx="88" ry="10" fill="#1B3A6B" opacity="0.07"/>
+            <ellipse cx="150" cy="210" rx="85" ry="18" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <ellipse cx="150" cy="210" rx="60" ry="12" fill="none" stroke="#1B3A6B" stroke-width="1"/>
+            <circle cx="150" cy="150" r="75" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <circle cx="150" cy="150" r="55" fill="none" stroke="#1B3A6B" stroke-width="1"/>
+            <circle cx="150" cy="150" r="30" fill="#1B3A6B" opacity="0.07"/>
+            <path d="M110 130 Q130 110 150 120 Q170 110 190 130 Q195 150 175 165 Q160 178 150 175 Q140 178 125 165 Q105 150 110 130Z" fill="#C4622D" opacity="0.25"/>
+            <path d="M130 150 Q150 135 170 150 Q160 168 150 170 Q140 168 130 150Z" fill="#1B3A6B" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Piatto decorativo</div>
+          <div class="product-detail">Maiolica · Ø 30cm · Da parete o da tavola</div>
+          <div class="product-footer">
+            <div class="product-price">€88</div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="215" rx="60" ry="10" fill="#C4622D" opacity="0.1"/>
+            <path d="M110 100 Q105 210 150 218 Q195 210 190 100" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <ellipse cx="150" cy="100" rx="40" ry="12" fill="#E8E4D9" stroke="#1B3A6B" stroke-width="1.5"/>
+            <path d="M115 150 Q150 135 185 150" fill="none" stroke="#C4622D" stroke-width="2"/>
+            <path d="M112 170 Q150 155 188 170" fill="none" stroke="#C4622D" stroke-width="1.5" opacity="0.6"/>
+            <path d="M115 130 Q150 118 185 130" fill="none" stroke="#1B3A6B" stroke-width="1" opacity="0.4"/>
+            <path d="M108 190 Q150 178 192 190" fill="none" stroke="#1B3A6B" stroke-width="1" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Anfora portafiori</div>
+          <div class="product-detail">Maiolica · H 28cm · Motivo a onde</div>
+          <div class="product-footer">
+            <div class="product-price">€95</div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 300 300" class="product-svg">
+            <ellipse cx="150" cy="220" rx="75" ry="10" fill="#1B3A6B" opacity="0.08"/>
+            <rect x="85" y="90" width="130" height="130" rx="4" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="2"/>
+            <rect x="95" y="100" width="110" height="110" rx="2" fill="none" stroke="#1B3A6B" stroke-width="1"/>
+            <path d="M95 155 L205 155" stroke="#1B3A6B" stroke-width="0.5" opacity="0.3"/>
+            <path d="M150 100 L150 210" stroke="#1B3A6B" stroke-width="0.5" opacity="0.3"/>
+            <path d="M115 120 Q150 108 185 120 Q192 135 185 150 Q150 162 115 150 Q108 135 115 120Z" fill="#C4622D" opacity="0.2"/>
+            <circle cx="150" cy="135" r="15" fill="none" stroke="#1B3A6B" stroke-width="1.5"/>
+            <circle cx="150" cy="135" r="6" fill="#1B3A6B" opacity="0.4"/>
+            <path d="M95 165 Q130 190 150 185 Q170 190 205 165" fill="none" stroke="#C4622D" stroke-width="1.5"/>
+            <ellipse cx="150" cy="220" rx="65" ry="8" fill="#FAFAF7" stroke="#1B3A6B" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Alzatina da dolci</div>
+          <div class="product-detail">Maiolica · Ø 25cm · Edizione speciale</div>
+          <div class="product-footer">
+            <div class="product-price">€120</div>
+            <button class="btn-acquista">Acquista</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="processo-inner">
+    <div class="fade-in" style="text-align:center; max-width:500px; margin:0 auto 0">
+      <p class="section-eyebrow">Come funziona</p>
+      <h2 class="section-title">Dall'argilla alla tua tavola</h2>
+    </div>
+    <div class="steps fade-in">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Scegli il pezzo</div>
+        <div class="step-body">Sfoglia il catalogo e seleziona il pezzo che preferisci. Ogni articolo è disponibile in varianti di colore e dimensione.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Personalizza</div>
+        <div class="step-body">Vuoi un nome, una data, un dedica? Lo dipingiamo prima della seconda cottura. Nessun costo aggiuntivo per iscrizioni fino a 20 caratteri.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Cottura e collaudo</div>
+        <div class="step-body">Ogni pezzo personalizzato passa nel forno a 980°C. I colori si fissano per sempre. Controllo qualità manuale prima dell'imballo.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Spedizione sicura</div>
+        <div class="step-body">Imballiamo con doppia protezione antiurto. Spedizione tracciata in 3–5 giorni lavorativi in tutta Italia. Resi gratuiti entro 30 giorni.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIANZE -->
+<section class="testimonial-section">
+  <div style="max-width:1000px; margin:0 auto">
+    <div class="fade-in" style="text-align:center">
+      <p style="font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:0.75rem">Cosa dicono i clienti</p>
+      <h2 style="font-family:var(--serif); font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:700; color:white; line-height:1.2">Parole che ci fanno andare avanti</h2>
+    </div>
+    <div class="testimonial-grid fade-in">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Ho ordinato un servizio da sei come regalo di nozze. Sono arrivati perfetti, ogni pezzo con il nome degli sposi. La zia che li ha ricevuti ha pianto."</p>
+        <div class="testimonial-author">
+          <strong>Francesca M.</strong>
+          Roma — acquisto verificato
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Sono di Teramo e conosco le ceramiche di Castelli da sempre. Quelle di Terra d'Abruzzo sono tra le migliori che ho visto. Colori profondi, non sbiadiscono in lavastoviglie."</p>
+        <div class="testimonial-author">
+          <strong>Marco T.</strong>
+          Teramo — cliente dal 2019
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Ho arredato la cucina della casa in Abruzzo quasi interamente con i loro pezzi. Ogni ospite li nota. Li raccomando senza riserve."</p>
+        <div class="testimonial-author">
+          <strong>Stefano e Lucia B.</strong>
+          Milano — acquisto verificato
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="contatti-inner">
+    <div class="fade-in">
+      <p class="section-eyebrow">Contatti</p>
+      <h2 class="section-title">Parliamo del tuo ordine</h2>
+      <p class="section-body">Per ordini su misura, quantità superiori a 10 pezzi o spedizioni internazionali, scrivici direttamente.</p>
+      <div style="margin-top:2.5rem">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Laboratorio</div>
+            <div class="contact-value">Via dei Vasai 14, Castelli (TE) 64041</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Telefono</div>
+            <div class="contact-value">0861 94 32 11</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">info@terraabruzzo-ceramiche.it</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div>
+            <div class="contact-label">Orari laboratorio</div>
+            <div class="contact-value">Lun–Ven 9:00–13:00, 15:00–18:30</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text" placeholder="Nome">
+          <input type="text" placeholder="Cognome">
+        </div>
+        <input type="email" placeholder="Email">
+        <input type="tel" placeholder="Telefono (opzionale)">
+        <select>
+          <option value="">Tipo di richiesta...</option>
+          <option>Ordine singolo</option>
+          <option>Ordine multiplo (10+ pezzi)</option>
+          <option>Personalizzazione</option>
+          <option>Regalo aziendale</option>
+          <option>Altro</option>
+        </select>
+        <textarea placeholder="Descrivi cosa stai cercando. Se hai una foto di ispirazione, inviala via email."></textarea>
+        <button type="button" class="btn-submit">Invia richiesta →</button>
+        <p style="font-size:0.75rem; color:var(--testo-muted)">Rispondiamo entro 24 ore nei giorni lavorativi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Terra<span>d'Abruzzo</span> Ceramiche</div>
+  <div>Via dei Vasai 14 · Castelli (TE) · P.IVA 01234567890</div>
+  <div>© 2025 · Privacy Policy · Cookie</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Prodotti con prezzi reali (in €)
+const products = {
+  'tazza-colazione':   { name: 'Tazza da colazione — Terra d\'Abruzzo', price: 38 },
+  'vaso-tavolo':       { name: 'Vaso da tavolo — Terra d\'Abruzzo', price: 72 },
+  'zuppiera':          { name: 'Zuppiera con coperchio — Terra d\'Abruzzo', price: 145 },
+  'piatto-decorativo': { name: 'Piatto decorativo — Terra d\'Abruzzo', price: 88 },
+  'anfora':            { name: 'Anfora portafiori — Terra d\'Abruzzo', price: 95 },
+  'alzatina':          { name: 'Alzatina da dolci — Terra d\'Abruzzo', price: 120 },
+};
+
+const productIds = Object.keys(products);
+
+document.querySelectorAll('.btn-acquista').forEach((btn, i) => {
+  const productId = productIds[i] || productIds[0];
+  btn.addEventListener('click', async function() {
+    const product = products[productId];
+    this.textContent = '...';
+    this.disabled = true;
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId,
+          productName: product.name,
+          price: product.price,
+          quantity: 1
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Errore nel checkout: ' + (data.error || 'riprova'));
+        this.textContent = 'Acquista';
+        this.disabled = false;
+      }
+    } catch (err) {
+      alert('Errore di connessione. Riprova tra qualche secondo.');
+      this.textContent = 'Acquista';
+      this.disabled = false;
+    }
+  });
+});
+</script>
+</body>
+</html>
